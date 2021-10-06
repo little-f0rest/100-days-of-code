@@ -16,7 +16,6 @@ else:
 
 # not_leap = "Not leap year."
 # is_leap = "Leap year."
-
 # if year % 4 != 0:                           
 #   print(not_leap)                           
 # elif year % 100 == 0 and year % 400 != 0:
