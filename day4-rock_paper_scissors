@@ -35,51 +35,45 @@ explosion = '''
  .(      |      ),
 `  -----' `-----  '
 '''
+game_images = [rock, paper, scissors, explosion]
 
-
-# player choice:
 print("Let's play Rock, Paper, Scissors!")
-player_choice = input("Which do you choose: rock, paper, or scissors? ").lower()
+player_choice = int(input("Which do you choose? Type 0 for Rock, 1 for Paper, and 2 for Scissors. \n"))
 
-## secret 'cheat code':
-if player_choice == "bomb":
+## secret cheat code for choosing '7':
+if player_choice == 7:
   print(explosion)
-  print("You win, Cheater.")
+  print("You found the magic number! You win (cheater)!")
 
-else:
-
-  if player_choice == "rock":
-    print(rock)
-  elif player_choice == "paper":
-    print(paper)
-  elif player_choice == "scissors":
-    print(scissors)
-  else:
-    print("Invalid input! Please enter 'rock', 'paper', or 'scissors'")
-
-  # computer's choice:
+elif player_choice <= 2:
   ai_list = [rock, paper, scissors]
   ai_choice = random.choice(ai_list)
+  print(game_images[player_choice])
   print(ai_choice)
 
-  if player_choice == "rock":
+  if player_choice == 0:
+    # print(rock)
     if ai_choice == ai_list[1]:
       print("Paper beats rock. You lose :(")
     elif ai_choice == ai_list[2]:
       print("Rock beats scissors! You win!")
     else:
       print("You both chose rock! It's a tie!")
-  elif player_choice == "paper":
+  elif player_choice == 1:
+    # print(paper)
     if ai_choice == ai_list[0]:
       print("Paper beats rock! You win!")
     elif ai_choice == ai_list[2]:
       print("Scissors beats paper. You lose :(")
     else:
       print("You both chose paper! It's a tie!")
-  else:
+  elif player_choice == 2:
+    # print(scissors)
     if ai_choice == ai_list[1]:
       print("Scissors beats paper! You win!")
     elif ai_choice == ai_list[0]:
       print("Rock beats scissors. You lose :(")
     else:
       print("You both chose scissors! It's a tie!")
+else:
+  print("Invalid choice. You lose :(")
