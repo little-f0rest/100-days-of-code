@@ -27,40 +27,59 @@ scissors = '''
 ---.__(___)
 '''
 
+explosion = '''
+       _.-._
+      ({  ` )
+       ` |''   *KABOOM!*
+        \_/
+ .(      |      ),
+`  -----' `-----  '
+'''
+
+
 # player choice:
 print("Let's play Rock, Paper, Scissors!")
 player_choice = input("Which do you choose: rock, paper, or scissors? ").lower()
 
-if player_choice == "rock":
-  print(rock)
-elif player_choice == "paper":
-  print(paper)
-else:
-  print(scissors)
+## secret 'cheat code':
+if player_choice == "bomb":
+  print(explosion)
+  print("You win, Cheater.")
 
-# computer's choice:
-ai_list = [rock, paper, scissors]
-ai_choice = random.choice(ai_list)
-print(ai_choice)
-
-if player_choice == "rock":
-  if ai_choice == ai_list[1]:
-    print("Paper beats rock. You lose :(")
-  elif ai_choice == ai_list[2]:
-    print("Rock beats scissors! You win!")
-  else:
-    print("You both chose rock! It's a tie!")
-elif player_choice == "paper":
-  if ai_choice == ai_list[0]:
-    print("Paper beats rock! You win!")
-  elif ai_choice == ai_list[2]:
-    print("Scissors beats paper. You lose :(")
-  else:
-    print("You both chose paper! It's a tie!")
 else:
-  if ai_choice == ai_list[1]:
-    print("Scissors beats paper! You win!")
-  elif ai_choice == ai_list[0]:
-    print("Rock beats scissors. You lose :(")
+
+  if player_choice == "rock":
+    print(rock)
+  elif player_choice == "paper":
+    print(paper)
+  elif player_choice == "scissors":
+    print(scissors)
   else:
-    print("You both chose scissors! It's a tie!")
+    print("Invalid input! Please enter 'rock', 'paper', or 'scissors'")
+
+  # computer's choice:
+  ai_list = [rock, paper, scissors]
+  ai_choice = random.choice(ai_list)
+  print(ai_choice)
+
+  if player_choice == "rock":
+    if ai_choice == ai_list[1]:
+      print("Paper beats rock. You lose :(")
+    elif ai_choice == ai_list[2]:
+      print("Rock beats scissors! You win!")
+    else:
+      print("You both chose rock! It's a tie!")
+  elif player_choice == "paper":
+    if ai_choice == ai_list[0]:
+      print("Paper beats rock! You win!")
+    elif ai_choice == ai_list[2]:
+      print("Scissors beats paper. You lose :(")
+    else:
+      print("You both chose paper! It's a tie!")
+  else:
+    if ai_choice == ai_list[1]:
+      print("Scissors beats paper! You win!")
+    elif ai_choice == ai_list[0]:
+      print("Rock beats scissors. You lose :(")
+    else:
+      print("You both chose scissors! It's a tie!")
