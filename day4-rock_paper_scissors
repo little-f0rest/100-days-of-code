@@ -50,7 +50,6 @@ if player_choice == "rock":
     print("Rock beats scissors! You win!")
   else:
     print("You both chose rock! It's a tie!")
-
 elif player_choice == "paper":
   if ai_choice == ai_list[0]:
     print("Paper beats rock! You win!")
@@ -58,7 +57,6 @@ elif player_choice == "paper":
     print("Scissors beats paper. You lose :(")
   else:
     print("You both chose paper! It's a tie!")
-
 else:
   if ai_choice == ai_list[1]:
     print("Scissors beats paper! You win!")
