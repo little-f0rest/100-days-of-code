@@ -1,0 +1,47 @@
+logo = """
+ _______         _______  _______ _______   _________        _______    _               _______ ______  _______ _______ 
+(  ____ \\     /(  ____ \(  ____ (  ____ \  \__   __/\     /(  ____ \  ( (    /|\     /(       |  ___ \(  ____ (  ____ )
+| (    \/ )   ( | (    \/| (    \/ (    \/     ) (  | )   ( | (    \/  |  \  ( | )   ( | () () | (   ) ) (    \/ (    )|
+| |     | |   | | (__    | (_____| (_____      | |  | (___) | (__      |   \ | | |   | | || || | (__/ /| (__   | (____)|
+| | ____| |   | |  __)   (_____  |_____  )     | |  |  ___  |  __)     | (\ \) | |   | | |(_)| |  __ ( |  __)  |     __)
+| | \_  ) |   | | (            ) |     ) |     | |  | (   ) | (        | | \   | |   | | |   | | (  \ \| (     | (\ (   
+| (___) | (___) | (____/\/\____) /\____) |     | |  | )   ( | (____/\  | )  \  | (___) | )   ( | )___) ) (____/\ ) \ \__
+(_______|_______|_______/\_______)_______)     )_(  |/     \(_______/  |/    )_|_______)/     \|/ \___/(_______//   \__/
+                                                                                                                        
+"""
+print(logo)
+
+import random
+
+
+the_number = random.randrange(0, 100)
+print("Welcome to Guess the Number!")
+difficulty = input("What difficulty would you like to play on? Type 'easy' or 'hard': ").lower()
+
+def check_guess(num, guess):
+    if num == guess:
+        print(f"You guessed the number, {the_number}. You win!")
+        return True
+    elif num < guess:
+        print("Too high.")
+    elif num > guess:
+        print("Too low.")
+
+def player_lives():
+    global difficulty
+    if difficulty == "easy":
+        return 10
+    elif difficulty == "hard":
+        return 5
+
+lives = player_lives()
+game_over = False
+while not game_over:
+    print(f"Lives left: {lives}")
+    user_guess = int(input('Guess a number between 1 and 100: '))
+    lives -= 1
+    if check_guess(the_number, user_guess) == True:
+        game_over = True
+    if lives == 0:
+        print("You lose. Game over.")
+        game_over = True
