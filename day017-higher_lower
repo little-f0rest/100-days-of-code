@@ -1,0 +1,61 @@
+import random
+from replit import clear
+from art import logo, vs
+from game_data import data
+
+def new_choice():
+    """Get data from random account"""
+    return random.choice(data)
+
+def format_data(account):
+    """Format account into printable format: name, description, and country"""
+    name = account["name"]
+    description = account["description"]
+    country = account["country"]
+    # print(f'{name}: {account["follower_count"]}')
+    return f"{name}, a {description}, from {country}"
+
+def compare(a, b):
+    """Compares the follower count of each account"""
+    if a > b:
+        return 0
+    elif a < b:
+        return 1
+
+game_over = False
+round_one = True
+score = 0
+print(logo)
+while not game_over:
+    while round_one:
+        a_comp = new_choice()
+        round_one = False
+    b_comp = new_choice()
+    while b_comp == a_comp:
+        b_comp = new_choice()
+
+    print(f"Compare A: {format_data(a_comp)}.")
+    print(vs)
+    print(f"Against B: {format_data(b_comp)}.")
+
+    a_followers = int(a_comp["follower_count"])
+    b_followers = int(b_comp["follower_count"])
+    player_pick = input("Who has more followers? Type 'A' or 'B': ").upper()
+
+    if compare(a_followers, b_followers) == 0 and player_pick == "A":
+        score += 1
+        a_comp = b_comp
+        clear()
+        print(logo)
+        print(f"You're right! Current score: {score}")
+    elif compare(a_followers, b_followers) == 1 and player_pick == "B":
+        score += 1
+        a_comp = b_comp
+        clear()
+        print(logo)
+        print(f"You're right! Current score: {score}")
+    else:
+        clear()
+        print(logo)
+        print(f"Sorry, that's wrong. Final score: {score}")
+        game_over = True
