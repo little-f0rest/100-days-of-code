@@ -1,5 +1,4 @@
-def machine_on():
-    MENU = {
+MENU = {
         "espresso": {
             "ingredients": {
                 "water": 50,
@@ -25,72 +24,80 @@ def machine_on():
         }
     }
 
-    resources = {
-        "water": 300,
-        "milk": 200,
-        "coffee": 100,
-    }
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
 
-    def enough_resources(ordered_drink, substance):
-        """Check if there are enough remaining resources to make the ordered drink."""
-        if substance in MENU[ordered_drink]["ingredients"]:
-            menu_substance = MENU[ordered_drink]["ingredients"][substance]
-        else:
-            menu_substance = 0
-        if menu_substance < resources[substance]:
-            return True
-        else:
-            print(f"Sorry, there is not enough {substance}.")
-            return False
 
-    quarter = 0.25
-    dime = 0.10
-    nickel = 0.05
-    penny = 0.01
+def enough_resources(ordered_drink, substance):
+    """Check if there are enough remaining resources to make the ordered drink."""
+    if substance in MENU[ordered_drink]["ingredients"]:
+        menu_substance = MENU[ordered_drink]["ingredients"][substance]
+    else:
+        menu_substance = 0
+    if menu_substance < resources[substance]:
+        return True
+    else:
+        print(f"Sorry, there is not enough {substance}.")
+        return False
 
-    def process_coins(quarters, dimes, nickels, pennies):
-        q = quarters * quarter
-        d = dimes * dime
-        n = nickels * nickel
-        p = pennies * penny
-        return q + d + n + p
 
-    money = 0.0
-    active = True
-    while active:
-        user_input = input("What would you like? (espresso/latte/cappuccino): ").lower()
-        if user_input == "off":
-            print("Coffee machine powering down.")
-            active = False
-        elif user_input == "report":
-            print(f"Current resources:\n{resources['water']}ml\n{resources['milk']}ml\n{resources['coffee']}g\n${money}")
-        elif user_input == "espresso" or user_input == "latte" or user_input == "cappuccino":
-            if enough_resources(user_input, "water") and enough_resources(user_input, "milk") and enough_resources(user_input, "coffee"):
-                print("Please insert coins.")
-                given_quarters = float(input("How many quarters?: "))
-                given_dimes = float(input("How many dimes?: "))
-                given_nickels = float(input("How many nickels?: "))
-                given_pennies = float(input("How many pennies?: "))
-                total_coins = process_coins(given_quarters, given_dimes, given_nickels, given_pennies)
-                if total_coins < MENU[user_input]["cost"]:
-                    print("Sorry that is not enough. Money refunded.")
-                else:
-                    if total_coins > MENU[user_input]["cost"]:
-                        change = total_coins - MENU[user_input]["cost"]
-                        print(f"Here is ${round(change, 2)} in change.")
-                money += MENU[user_input]["cost"]
-                if "water" in MENU[user_input]["ingredients"]:
-                    resources["water"] -= MENU[user_input]["ingredients"]["water"]
-                if "coffee" in MENU[user_input]["ingredients"]:
-                    resources["coffee"] -= MENU[user_input]["ingredients"]["coffee"]
-                if "milk" in MENU[user_input]["ingredients"]:
-                    resources["milk"] -= MENU[user_input]["ingredients"]["milk"]
-                print(f"Here is your {user_input}. Enjoy!")
+quarter = 0.25
+dime = 0.10
+nickel = 0.05
+penny = 0.01
 
+
+def process_coins(quarters, dimes, nickels, pennies):
+    q = quarters * quarter
+    d = dimes * dime
+    n = nickels * nickel
+    p = pennies * penny
+    return q + d + n + p
+
+
+money = 0.0
+active = True
+while active:
+    user_input = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    if user_input == "off":
+        print("Coffee machine powering down.")
+        active = False
+    elif user_input == "report":
+        print(f"Current resources:\n{resources['water']}ml\n{resources['milk']}ml\n{resources['coffee']}g\n${money}")
+    elif user_input == "espresso" or user_input == "latte" or user_input == "cappuccino":
+        if enough_resources(user_input, "water") and enough_resources(user_input, "milk") and enough_resources(user_input, "coffee"):
+            print("Please insert coins.")
+            given_quarters = float(input("How many quarters?: "))
+            given_dimes = float(input("How many dimes?: "))
+            given_nickels = float(input("How many nickels?: "))
+            given_pennies = float(input("How many pennies?: "))
+            total_coins = process_coins(given_quarters, given_dimes, given_nickels, given_pennies)
+            if total_coins < MENU[user_input]["cost"]:
+                print("Sorry that is not enough. Money refunded.")
             else:
-                active = False
+                if total_coins > MENU[user_input]["cost"]:
+                    change = total_coins - MENU[user_input]["cost"]
+                    print(f"Here is ${round(change, 2)} in change.")
+            money += MENU[user_input]["cost"]
+            if "water" in MENU[user_input]["ingredients"]:
+                resources["water"] -= MENU[user_input]["ingredients"]["water"]
+            if "coffee" in MENU[user_input]["ingredients"]:
+                resources["coffee"] -= MENU[user_input]["ingredients"]["coffee"]
+            if "milk" in MENU[user_input]["ingredients"]:
+                resources["milk"] -= MENU[user_input]["ingredients"]["milk"]
+            print(f"Here is your {user_input}. Enjoy!")
+
         else:
-            print("Invalid input.")
+            active = False
+    else:
+        print("Invalid input.")
 
 
-machine_on()
+# TODO 1. Print report (resources)
+# TODO 2. Check resources sufficient? Report and can't make drink.
+# TODO 3. Process coins.
+# TODO 4. Check transaction successful?
+# TODO 5. Make coffee. Deduct resources.
